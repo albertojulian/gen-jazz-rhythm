@@ -5,23 +5,6 @@ CHORD_JOIN = ":"
 
 class M21_and_show:
 
-    chord_dict_v0 = {
-        "C_M7": [["C3", "B3", "D4", "E4", "G4"], ["C3", "E4", "G4", "B4", "D5"]],
-        # "C_6": [["C3", "A3", "D4", "E4", "G4"], ["C3", "E4", "G4", "A4", "D5"]],
-        "C_7": [["C3", "Bb3", "D4", "E4", "A4"], ["C3", "E4", "A4", "Bb4", "D5"]],
-        "C_7(b9)": [["C3", "Bb3", "Db4", "E4", "A4"], ["C3", "E4", "A4", "Bb4", "Db5"]],
-        "C_o7": [["C3", "A3", "Eb4", "Gb4"], ["C3", "Eb4", "Gb4", "A4"], ["C3", "Gb4", "A4", "Eb5"]],  # diminished 7th
-        "C_-7": [["C3", "Bb3", "D4", "Eb4", "G4"], ["C3", "Eb4", "G4", "Bb4", "D5"]],
-        "C_-6": [["C3", "A3", "D4", "Eb4", "G4"], ["C3", "Eb4", "G4", "A4", "D5", ]],
-        "C_ø7": [["C3", "Bb3", "Eb4", "Gb4"], ["C3", "Eb4", "Gb4", "Bb4"], ["C3", "Gb4", "Bb4", "Eb5"]],  # half diminished 7th
-    }
-
-
-    training_data_v0 = ["D_7", "G_7", "C_M7", "C_-7", "F_7", "E_M7", "A_ø7", "D_7(b9)", "G_-7",
-                     "Db_M7", "C_M7", "Ab_M7", "F_-7", "Bb_7(b9)", "Ab_-7", "Eb_-6",
-                     "Ab_7(b9)", "C#_-7", "C_7", "B_-6", "E_7", "Eb_-7", "Eb_o7",
-                     "Bb_-7", "Eb_7", "Ab_M7", "C_ø7", "C_o7", "C#_-6", "B_7", "E_M7"]
-    
     chord_dict = {
         "C:M7": [["C3", "B3", "D4", "E4", "G4"], ["C3", "E4", "G4", "B4", "D5"]],
         "C:6": [["C3", "A3", "D4", "E4", "G4"], ["C3", "E4", "G4", "A4", "D5"]],
@@ -36,12 +19,6 @@ class M21_and_show:
         "C:ø7": [["C3", "Bb3", "Eb4", "Gb4"], ["C3", "Eb4", "Gb4", "Bb4"], ["C3", "Gb4", "Bb4", "Eb5"]],  # half diminished 7th
     }
 
-    initial_keys = ["A", "Bb", "B", "C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab"]
-
-    training_data = ["D:7", "G:7#5", "C:M7", "C:-7", "F:7", "E:M7", "A:ø7", "D:7(b9)", "G:-7",
-                     "Db:M7", "C:M7", "Ab:M7", "F:-7", "Bb:7(b9)", "Ab:-7", "Eb:-6",
-                     "Ab:7(b9)", "C#:-7", "C:7", "B:-6", "E:7", "Eb:-7", "Eb:o7",
-                     "Bb:-7", "Eb:7", "Ab:M7", "C:ø7", "C:o7", "C#:-6", "B:7", "E:M7"]
 
     V7_SMOOTH_VOICE_LEAD_PROBABILITY = 0.9
     NON_V7_SMOOTH_VOICE_LEAD_PROBABILITY = 0.5

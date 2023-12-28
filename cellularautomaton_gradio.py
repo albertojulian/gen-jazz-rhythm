@@ -3,8 +3,8 @@ import gradio as gr
 import os
 
 from pattern_m21_converter import PatternMusic21Converter, PitchedInstruments, DrumInstruments, States, melody_instruments_d
-from m21_musescore import M21_and_show # mod_chord_duration
-from omnibook_read import chords_and_21melody
+from m21_musescore import M21_and_show
+from omnibook_read import chords_and_m21melody
 
 CHORD_SPLIT = ":"
 MEASURE_DURATION = 4
@@ -307,14 +307,11 @@ def add_rhythm(selected_file, selected_instrument=None,
     file_path = os.path.join(folder, selected_file)
 
     m21_and_show = M21_and_show()
-    # chord_dict = m21_and_show.chord_dict
 
     score_title = selected_file.split("/")[-1].strip(".xml")
 
-    chord_progression, generated_melody, _, key, tempo = chords_and_21melody(file_path)
-    # chord_progression, generated_melody = chords_and_melody() # alex
+    chord_progression, generated_melody, _, key, tempo = chords_and_m21melody(file_path)
 
-    # pattern_length (int): The length of the drum pattern in beats
     back_generator = CellularAutomatonBackMusicGenerator(
         melody=generated_melody,
         chord_sequence=chord_progression,
@@ -357,15 +354,11 @@ with gr.Blocks() as demo:
 
     with gr.Row():
 
-        xml_files = list_files()
-        selected_file = gr.Dropdown(value=xml_files[0], choices=xml_files,
-                                    label="Select an Omnibook tune")
-
-        melody_instruments_list = list_melody_instruments()
-        selected_instrument = gr.Dropdown(value=melody_instruments_list[0], choices=melody_instruments_list,
-                                          label="Select an instrument")
-
         with gr.Column(scale=1):
+
+            xml_files = list_files()
+            selected_file = gr.Dropdown(value=xml_files[0], choices=xml_files,
+                                        label="Select an Omnibook tune")
 
             show_leadsheet_btn = gr.Button("Show leadsheet")
 
@@ -374,6 +367,9 @@ with gr.Blocks() as demo:
         show_leadsheet_btn.click(show_leadsheet, inputs=selected_file, outputs=[show_output])
 
         with gr.Column(scale=1):
+            melody_instruments_list = list_melody_instruments()
+            selected_instrument = gr.Dropdown(value=melody_instruments_list[0], choices=melody_instruments_list,
+                                              label="Select an instrument for the melody")
 
             add_rhythm_btn = gr.Button("Add Rhythm!!")
 
