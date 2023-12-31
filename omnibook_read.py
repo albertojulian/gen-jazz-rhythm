@@ -29,6 +29,7 @@ def chords_and_m21melody(omni_file):
 
     tempo = None
     for element in m0:
+
         if isinstance(element, m21.tempo.MetronomeMark):
             tempo = element
 
