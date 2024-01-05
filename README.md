@@ -1,4 +1,11 @@
 # gen-jazz-rhythm
+This repository is one of the practice exercises I developed for the [Generative Music AI course](https://www.youtube.com/playlist?list=PL-wATfeyAMNqAPjwGT3ikEz3gMo23pl-D) and [workshop](https://www.upf.edu/web/mtg/generative-music-ai-workshop) (which took place in Barcelona between the 11-15 Dec 2023, jointly by Sound of AI and Universitat Pompeu Fabra - Music Technology Group).
+
+It is based on a Celullar Automaton, one of the "classic" generative music AI methods introduced in the course. 
+
+The lectures about Cellular Automaton cover both [theory](https://www.youtube.com/watch?v=YoRPjU_Fbq0) and [practice](https://www.youtube.com/watch?v=GIoLWVPb8mc).
+
+### Main functionality
 Taking a lead-sheet score file (with melody and chord symbols), it generates a score with: 
 - the same melody
 - the chords (except the root note) for piano, with some syncopation
@@ -8,10 +15,11 @@ Taking a lead-sheet score file (with melody and chord symbols), it generates a s
   - occasionally, all-drum syncopations synchronised with the piano
   - occasionally, some crash cymbal or kick drum beat
 
+Next figure shows the Donna Lee lead-sheet, one of the Omnibook files:
 <img src="readme_files/Donna_Lee_orig.png" alt="Descripción de la imagen" width="500" height="200" />
-
 [Download audio of Donna Lee lead-sheet](https://github.com/albertojulian/gen-jazz-rhythm/blob/main/readme_files/Donna_Lee_orig.mp3)
 
+Next figure shows the Donna Lee file with the rhythm provided by the Cellular Automaton:
 ![](readme_files/Donna_Lee_rhythm.png)
 [Download audio of Donna Lee with rhythm](https://github.com/albertojulian/gen-jazz-rhythm/blob/main/readme_files/Donna_Lee_rhythm.mp3)
 
@@ -30,7 +38,11 @@ The interface is composed of:
 ## Score management and display
 The music elements are managed with the `music21` python library. When the score is complete, it is shown in MuseScore (or another xml interpreter integrated with `music21`). 
 
-In case the score is played in MuseScore, it will
+## Files
+- `cellularautomaton_gradio.py`:
+- `pattern_m21_converter.py`:
+- `m21_musescore.py`:
+- `omnibook_read.py`:
 
 ## Credits
 Omnibook files, Ken Deguernel
@@ -58,4 +70,4 @@ In order to display the Omnibook files with the proper key signature in MuseScor
 ### Transposed instruments
 Instruments such as alto sax, tenor sax, are said to be transposed: when a tenor sax in Bb plays a C, it sounds as a Bb; in other words, the transposition interval is **two semitones down**. 
 
-Therefore, if we want to assign a tenor sax in Bb to a part in C, the part must be transposed **two semitones up** if we want to hear the part in C. This is the reason why the Omnibook files with rhythm may have different key signatures for melody and chords.
+Therefore, if we want to assign a tenor sax in Bb to a part in C, the part must be transposed **two semitones up** if we want to hear the part in C. This is the reason why the scores of Omnibook files with rhythm may have different key signatures for melody and chord parts.
