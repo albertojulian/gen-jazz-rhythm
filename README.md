@@ -6,8 +6,8 @@ It is based on a Celullar Automaton, one of the "classic" generative music AI me
 The lectures about Cellular Automaton cover both [theory](https://www.youtube.com/watch?v=YoRPjU_Fbq0) and [practice](https://www.youtube.com/watch?v=GIoLWVPb8mc).
 
 ### Main functionality
-Taking a lead-sheet score file (with melody and chord symbols), it generates a score with: 
-- the same melody
+Taking a lead-sheet score file (with melody and chord symbols), the Cellular Automaton generates a score with: 
+- the same melody and improvisation
 - the chords (except the root note) for piano, with some syncopation
 - the root note of each chord is assigned to a double-bass
 - drums playing jazz rhythm:
@@ -15,15 +15,15 @@ Taking a lead-sheet score file (with melody and chord symbols), it generates a s
   - occasionally, all-drum syncopations synchronised with the piano
   - occasionally, some crash cymbal or kick drum beat
 
-Next figure shows Charlie Parker's "Donna Lee" lead-sheet:
+Next figure shows the first eight measures of Charlie Parker's "Donna Lee" lead-sheet:
 
-<img src="readme_files/Donna_Lee_orig.png" alt="Descripción de la imagen" width="500" height="200" />
+<img src="readme_files/Donna_Lee_orig.png" alt="Donna Lee lead-sheet" width="500" height="200" />
 
 [Download audio of Donna Lee lead-sheet](https://github.com/albertojulian/gen-jazz-rhythm/blob/main/readme_files/Donna_Lee_orig.mp3)
 
-Next figure shows the Donna Lee file with the rhythm provided by the Cellular Automaton:
+Next figure shows the Donna Lee score with the rhythm provided by the Cellular Automaton:
 
-<img src="readme_files/Donna_Lee_rhythm.png" alt="Descripción de la imagen" width="800" height="500" />
+<img src="readme_files/Donna_Lee_rhythm.png" alt="Donna Lee after rhythm addition" width="800" height="500" />
 
 [Download audio of Donna Lee with rhythm](https://github.com/albertojulian/gen-jazz-rhythm/blob/main/readme_files/Donna_Lee_rhythm.mp3)
 
@@ -53,8 +53,7 @@ The music elements are managed with the `music21` python library. When the score
 - `m21_musescore.py`: includes the `class M21_and_show`, which mainly translates a chord symbol sequence into a `music21` chord and bass sequence; the `chord_dict` defines the chord types, and their versions.
 
 ## Credits
-**MusicXML Omnibook files**: https://homepages.loria.fr/evincent/omnibook/
-Ken Déguernel, Emmanuel Vincent, and Gérard Assayag. "Using Multidimensional Sequences for Improvisation in the OMax Paradigm",
+**[Charlie Parker Omnibook MusicXML files](https://homepages.loria.fr/evincent/omnibook/)**: Ken Déguernel, Emmanuel Vincent, and Gérard Assayag. "Using Multidimensional Sequences for Improvisation in the OMax Paradigm",
 in Proceedings of the 13th Sound and Music Computing Conference, 2016.
 
 Cellular Automaton framework: The Sound of AI
