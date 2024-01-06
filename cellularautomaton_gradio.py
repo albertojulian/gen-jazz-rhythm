@@ -64,11 +64,8 @@ class CellularAutomatonRhythmGenerator:
             print("Initial states:\n", self.state)
 
         self._rules = {
-            # "jazz_chord": self._apply_jazz_chord_rule,
-            # "jazz_bass": self._apply_jazz_bass_rule,
             "jazz_drum": self._apply_jazz_drum_rule,
             "jazz_syncopation": self._apply_jazz_syncopation_rule,
-            # "note_continuity": self._apply_note_continuity_rule,
         }
 
     def step(self, s):
@@ -147,17 +144,6 @@ class CellularAutomatonRhythmGenerator:
             new_state = rule(position, new_state)
         return new_state
 
-    def _apply_jazz_chord_rule(self, position, new_state):
-
-        new_state[PitchedInstruments.CHORD.value][position] = States.FILL_1.value
-
-        return new_state
-
-    def _apply_jazz_bass_rule(self, position, new_state):
-
-        new_state[PitchedInstruments.BASS.value][position] = States.FILL_1.value
-
-        return new_state
 
     def _apply_jazz_drum_rule(self, position, new_state):
 
@@ -165,7 +151,7 @@ class CellularAutomatonRhythmGenerator:
             new_foot_hihat_state = States.OFF.value
 
             if np.random.random() < self.EVEN_BEAT_SWING_PROBABILITY:
-                new_ride_cymbal_state = States.FILL_2_1.value
+                new_ride_cymbal_state = States.FILL_1_1.value
             else:
                 new_ride_cymbal_state = States.FILL_1.value
 
@@ -173,7 +159,7 @@ class CellularAutomatonRhythmGenerator:
             new_foot_hihat_state = States.FILL_1.value
 
             if np.random.random() < self.ODD_BEAT_SWING_PROBABILITY:
-                new_ride_cymbal_state = States.FILL_2_1.value
+                new_ride_cymbal_state = States.FILL_1_1.value
             else:
                 new_ride_cymbal_state = States.OFF.value
 
@@ -224,36 +210,6 @@ class CellularAutomatonRhythmGenerator:
 
         return new_state
 
-    def _apply_note_continuity_rule(self, position, new_state):
-
-        next_position = position + 1
-        if next_position < self.pattern_length:
-            bass_note = self.beat_bass_sequence[position]
-            melody_note = self.melody[position]
-            melody_note_midi = m21.pitch.Pitch(melody_note).midi
-
-            next_bass_note = self.beat_bass_sequence[next_position]
-            next_melody_note = self.melody[next_position]
-            next_melody_note_midi = m21.pitch.Pitch(next_melody_note).midi
-
-            if melody_note_midi == next_melody_note_midi:
-                if bass_note != next_bass_note:
-                    # tie current note to next
-                    new_state[PitchedInstruments.MELODY.value][position] = States.FILL_1_T.value
-            else:
-                if np.random.random() < self.MELODY_SYNC_PROBABILITY:
-                    # if np.random.random() < self.MELODY_SYNC_PROBABILITY:
-                    if np.random.random() < (1 - self.MELODY_SYNC_PROBABILITY):
-                        new_state[PitchedInstruments.MELODY.value][position] = States.FILL_2_1.value
-                    else:
-                        new_state[PitchedInstruments.MELODY.value][position] = States.FILL_0_1.value
-                else:
-                    if np.random.random() < self.MELODY_SYNC_PROBABILITY:
-                        new_state[PitchedInstruments.MELODY.value][position] = States.OFF.value
-
-            # the rest has been initialized to FILL_1
-
-        return new_state
 
 def show_leadsheet(selected_file, folder="./Omnibook"):
 

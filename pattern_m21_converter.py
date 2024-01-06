@@ -1,7 +1,7 @@
 from enum import Enum
 
 import numpy as np
-import music21 as m21  # instrument, metadata, note, stream, clef, tie
+import music21 as m21
 
 CHORD_SPLIT = ":"
 MEASURE_DURATION = 4
@@ -11,6 +11,8 @@ melody_m21instruments = [
     m21.instrument.TenorSaxophone,
     m21.instrument.SopranoSaxophone,
     m21.instrument.Flute,
+    m21.instrument.Vibraphone,
+    m21.instrument.Violin,
 ]
 
 melody_instruments_d = {instr().instrumentName: instr for instr in melody_m21instruments}
@@ -34,7 +36,7 @@ class DrumInstruments(Enum):
 class States(Enum):
     OFF = 0
     FILL_1 = 1  # fill whole beat
-    FILL_2_1 = 2  # swing
+    FILL_1_1 = 2  # swing
     FILL_0_1 = 3  # swing syncopation
     FILL_1_T = 4  # fill whole beat and tie with next
 
@@ -404,7 +406,7 @@ class PatternMusic21Converter:
                 current_measure.append(drum_note)
 
             elif (
-                state[drum_instrument.value][position] == States.FILL_2_1.value
+                state[drum_instrument.value][position] == States.FILL_1_1.value
             ):
                 note_pitch = self._get_midi_pitch_for_instrument(
                     drum_instrument
