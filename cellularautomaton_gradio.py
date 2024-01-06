@@ -15,40 +15,38 @@ import music21 as m21 # instrument, metadata, note, stream, clef, tie
 
 class CellularAutomatonRhythmGenerator:
     """
-    Generates back patterns using a cellular automaton.
+    Generates rhythm patterns using a cellular automaton.
 
-    TODO: update
-    This class simulates a 2D cellular automaton where each cell represents a
-    drum sound (kick, snare, or hi-hat) at a given time step. The state of
-    each cell evolves based on predefined rules, resulting in a rhythmic
-    drum pattern.
+    This class simulates a 2D cellular automaton where each cell represents
+    piano chords, bass or drum sounds (ride, crash, kick, snare, or hi-hat)
+    at a given time step. The state of each cell evolves based on predefined rules,
+    resulting in a rhythmic pattern.
 
     Attributes:
-        pattern_length (int): Length of the drum pattern in beats.
-        state (np.ndarray): Current state of the drum pattern.
+        melody (list): Sequence of figures (notes or rests).
+        chord_sequence (list): Sequence of chords.
     """
 
-    # HIHAT_ON_PROBABILITY = 0.7
-    MUTATION_PROBABILITY = 0.1
-    MELODY_SYNC_PROBABILITY = 0.7
     # CHORD_TIE_PROBABILITY = 0.5
     EVEN_BEAT_SWING_PROBABILITY = 0.2
     ODD_BEAT_SWING_PROBABILITY = 0.8
 
     def __init__(self, melody, chord_sequence, synco_prob=0.5, kick_crash_prob=0.2, print_states=False):
         """
-        Initializes the CellularAutomatonBackMusicGenerator with a specified pattern
+        Initializes the CellularAutomatonRhythmGenerator with a specified pattern
         length.
 
-        TODO: update
         Parameters:
-            pattern_length (int): The length of the drum pattern in beats.
+            melody (list): Sequence of figures (notes or rests).
+            chord_sequence (list): Sequence of chords. Each chord will be split in two parts:
+                - the root note will be assigned to the bass
+                - the rest of the chord will be assigned to the piano
         """
 
         self.melody = melody
         self.chord_sequence = chord_sequence
 
-        # pattern_length (int): The length of the drum pattern in beats.
+        # pattern_length: The length of the tune pattern in beats.
         # e.g. length==16 => 4 measures 4/4 if beat==quarter, 2 measures if beat==8th
         self.pattern_length = sum([duration for (_, duration) in self.chord_sequence])
 
@@ -146,6 +144,13 @@ class CellularAutomatonRhythmGenerator:
 
 
     def _apply_jazz_drum_rule(self, position, new_state):
+        """
+        Apply basic swing rhythm, with some randomness
+
+        :param position: position in the pattern
+        :param new_state: state before being modified
+        :return: new_state: state after being modified
+        """
 
         if (position % 2) == 0: # even beats: no hihat, one ride beat
             new_foot_hihat_state = States.OFF.value
@@ -170,8 +175,12 @@ class CellularAutomatonRhythmGenerator:
 
     def _apply_jazz_syncopation_rule(self, position, new_state):
         """
-        If a chord type is V7 or o7, randomly replace first beat by quarter rest + 8th.
-        Add snare and bass (kick) drum
+        If a chord type is V7 or o7, randomly replace quarter by eighth rest + eighth in:
+         chord, bass, snare, kick and hi hat
+
+        :param position: position in the pattern
+        :param new_state: state before being modified
+        :return: new_state: state after being modified
         """
         if np.random.random() < self.SYNCOPATION_PROBABILITY:
             next_position = position + 1

@@ -32,8 +32,8 @@ Lead-sheet scores are stored in XML files with melody and chord symbols. The fil
 
 ## Execution
 - Install requirements.txt
-- Download the [Charlie Parker Omnibook files](https://homepages.loria.fr/evincent/omnibook/), which is a collection of 50 lead-sheets (including melody and improvisation) from Charlie Parker. Copy the .xml files into the `Omnibook` folder
-- Run `cellularautomaton_gradio.py`. It will show a URL which, when clicking, will open a `gradio` interface in the default web browser.
+- Download the [Charlie Parker Omnibook files](https://homepages.loria.fr/evincent/omnibook/), which is a collection of 50 lead-sheets (including melody and improvisation) from Charlie Parker in XML format. Copy the files into the `Omnibook` folder
+- Run `cellularautomaton_gradio.py`. It will show a URL which, when clicked, will open a `gradio` interface in the default web browser.
 
 The gradio interface is composed of: 
 - two dropdown lists to select the tune and the melody instrument
@@ -41,7 +41,7 @@ The gradio interface is composed of:
 - one button to add rhythm by executing the Cellular Automaton and show the score
 - some sliders to control several parameters
 
-![](readme_files/gradio_ui.png)
+<img src="readme_files/gradio_ui.png" alt="gradio interface" width="800" height="180" />
 
 ## Score management and display
 The music elements are managed with the `music21` python library. When the score is complete, it is shown in MuseScore (or another xml interpreter integrated with `music21`). 

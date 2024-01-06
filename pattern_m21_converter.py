@@ -144,7 +144,7 @@ class PatternMusic21Converter:
 
         transp_interv = melody_instrument.transposition
         if transp_interv != None:
-            print(f"Instrument transposed {transp_interv.semitones} semitones")
+            print(f"{melody_instrument.instrumentName} transposed {transp_interv.semitones} semitones")
 
         melody_part.append(melody_instrument)
 
@@ -204,7 +204,7 @@ class PatternMusic21Converter:
         melody_key_sign = None
         transp_interv = melody_instrument.transposition
         if transp_interv != None:
-            print(f"Instrument transposed {transp_interv.semitones} semitones")
+            print(f"{melody_instrument.instrumentName} transposed {transp_interv.semitones} semitones")
 
             # transpose melody key
             if self.key is not None:
