@@ -13,7 +13,7 @@ import numpy as np
 import music21 as m21 # instrument, metadata, note, stream, clef, tie
 
 
-class CellularAutomatonBackMusicGenerator:
+class CellularAutomatonRhythmGenerator:
     """
     Generates back patterns using a cellular automaton.
 
@@ -310,10 +310,10 @@ def add_rhythm(selected_file, selected_instrument=None,
 
     score_title = selected_file.split("/")[-1].strip(".xml")
 
-    chord_progression, generated_melody, _, key, tempo = chords_and_m21melody(file_path)
+    chord_progression, m21_melody, _, key, tempo = chords_and_m21melody(file_path)
 
-    back_generator = CellularAutomatonBackMusicGenerator(
-        melody=generated_melody,
+    rhythm_generator = CellularAutomatonRhythmGenerator(
+        melody=m21_melody,
         chord_sequence=chord_progression,
         synco_prob=synco_prob,
         kick_crash_prob=kick_crash_prob,
@@ -322,10 +322,10 @@ def add_rhythm(selected_file, selected_instrument=None,
 
     for step in range(1):
     # for step in range(16):
-        back_generator.step(step)
+        rhythm_generator.step(step)
 
     beat_duration = 1
-    beat_chord_sequence = back_generator.beat_chord_sequence
+    beat_chord_sequence = rhythm_generator.beat_chord_sequence
     # print(beat_chord_sequence)
     beat_chord_progression = [(chord_name, beat_duration) for chord_name in beat_chord_sequence]
 
@@ -336,8 +336,8 @@ def add_rhythm(selected_file, selected_instrument=None,
 
     melody_instrument = melody_instruments_d[selected_instrument]()
 
-    score = music_converter.to_music21_score(back_generator.state,
-                                             generated_melody,
+    score = music_converter.to_music21_score(rhythm_generator.state,
+                                             m21_melody,
                                              m21_chord_progression,
                                              m21_bass_line,
                                              score_title=score_title,
