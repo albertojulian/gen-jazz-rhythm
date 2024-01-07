@@ -1,5 +1,5 @@
 # gen-jazz-rhythm
-This repository is one of the practice exercises I developed for the [Generative Music AI course](https://www.youtube.com/playlist?list=PL-wATfeyAMNqAPjwGT3ikEz3gMo23pl-D) and [workshop](https://www.upf.edu/web/mtg/generative-music-ai-workshop) (which took place in Barcelona between the 11-15 Dec 2023, jointly by Valerio Velardo's "The Sound of AI" and Universitat Pompeu Fabra - Music Technology Group).
+This repository is one of the practice exercises I developed for the [Generative Music AI course](https://www.youtube.com/playlist?list=PL-wATfeyAMNqAPjwGT3ikEz3gMo23pl-D) and [workshop](https://www.upf.edu/web/mtg/generative-music-ai-workshop), which took place in Barcelona between the 11-15 Dec 2023, jointly by Valerio Velardo's "The Sound of AI" and Universitat Pompeu Fabra - Music Technology Group.
 
 It is based on a Celullar Automaton, one of the "classic" generative music AI methods introduced in the course. 
 
@@ -36,13 +36,13 @@ Lead-sheet scores are stored in XML files with melody and chord symbols. The fil
 The gradio interface is composed of: 
 - two dropdown lists to select the tune and the melody instrument
 - one button to show the lead-sheet score
-- one button to add rhythm by executing the Cellular Automaton and show the score
+- one button to add rhythm by executing the Cellular Automaton and show the score (see **Swing Style Setting** below)
 - some sliders to control several parameters
 
 <img src="readme_files/gradio_ui.png" alt="gradio interface" width="800" height="180" />
 
 ## Score management and display
-The music elements are managed with the `music21` python library. When the score is complete, it is shown in MuseScore (or another xml interpreter integrated with `music21`). 
+The music elements are managed with the `music21` python library. When the score is complete, it is shown in MuseScore (or another MusicXML viewer integrated with `music21`). 
 
 ## Files
 - `omnibook_read.py`: reads the selected Omnibook file and extracts the melody (and the improvisation) in `music21` format, and the chord symbols.
@@ -61,7 +61,7 @@ in Proceedings of the 13th Sound and Music Computing Conference, 2016.
 ### Tempo in Omnibook files
 Tempo is included in the first measure of Omnibook files, and added to the score to be shown (and played)
 
-### Swing style
+### Swing Style Setting
 In a standard swing style for slow to medium tempos (quarter=150 or less), two eighths are interpreted as a triplet of a quarter and an eighth: 
 <img src="readme_files/standard_swing.png" alt="Standard jazz swing" width="100" height="50" />
 
@@ -74,6 +74,6 @@ In order to display the Omnibook files with the proper key signature in MuseScor
 `score = m21.converter.parse(omni_file); key = score.analyze("key")`
 
 ### Transposed instruments
-Instruments such as alto sax, tenor sax, are said to be transposed: when a tenor sax in Bb plays a C, it sounds as a Bb; in other words, the transposition interval is **two semitones down**. 
+Instruments such as an alto sax or a tenor sax, are said to be transposed: when a tenor sax in Bb plays a C, it sounds as a Bb; in other words, the transposition interval is **two semitones down**. 
 
-Therefore, if we want to assign a tenor sax in Bb to a part in C, the part must be transposed **two semitones up** (D) if we want to hear the part in C. This is the reason why the scores of Omnibook files with rhythm may have different key signatures for melody and chord parts.
+Therefore, if we want to assign a tenor sax in Bb to a part in C, and we want to hear the part in C, the part must be transposed **two semitones up** (D). This is the reason why the scores of Omnibook files with rhythm may have different key signatures for melody and chord parts.
