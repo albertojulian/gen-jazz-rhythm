@@ -1,4 +1,4 @@
-# gen-jazz-rhythm
+# Generating jazz rhythm
 This repository is one of the practice exercises I developed for the [Generative Music AI course](https://www.youtube.com/playlist?list=PL-wATfeyAMNqAPjwGT3ikEz3gMo23pl-D) and [workshop](https://www.upf.edu/web/mtg/generative-music-ai-workshop), which took place in Barcelona between the 11-15 Dec 2023, jointly by [Valerio Velardo - The Sound of AI](https://thesoundofai.com/) and Universitat Pompeu Fabra - Music Technology Group.
 
 It is based on a Celullar Automaton, one of the "classic" generative music AI methods introduced in the course. 
